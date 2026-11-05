@@ -80,6 +80,18 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
     els.forEach(function (e) { io.observe(e); });
+    /* Safety net: if the page was busy (for example loading the 3D model) during a fast scroll, still show what has been reached. */
+    var pending = false;
+    function catchUp() {
+      pending = false;
+      els.forEach(function (e) {
+        if (!e.classList.contains('in') && e.getBoundingClientRect().top < window.innerHeight) {
+          e.classList.add('in'); io.unobserve(e);
+          $$('[data-count]', e).concat(e.dataset.count ? [e] : []).forEach(count);
+        }
+      });
+    }
+    window.addEventListener('scroll', function () { if (!pending) { pending = true; setTimeout(catchUp, 150); } }, { passive: true });
   }
   function count(el) {
     if (el.dataset.ran) return; el.dataset.ran = 1;
@@ -109,7 +121,16 @@
     b.addEventListener('click', function () { var o = n.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
     $$('a', n).forEach(function (a) { a.addEventListener('click', function () { n.classList.remove('open'); b.setAttribute('aria-expanded', false); }); });
   }
-
+  function lightbox() {
+    var box = $('#lightbox'); if (!box) return;
+    var img = $('img', box), last = null;
+    $$('.zoom').forEach(function (z) {
+      z.addEventListener('click', function () { var i = $('img', z); img.src = i.dataset.full || i.src; img.alt = i.alt; box.classList.add('open'); last = z; box.focus(); });
+    });
+    function close() { box.classList.remove('open'); if (last) last.focus(); }
+    box.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('open')) close(); });
+  }
 
   /* ---------- Site search ---------- */
   function search() {
@@ -283,8 +304,14 @@
   document.documentElement.classList.add('js');
   document.addEventListener('DOMContentLoaded', function () {
     /* Each feature runs on its own, so one failure cannot stop the rest of the page. */
-    [circuit, reveal, scrollFx, menu, lightbox, search, checklists, spy, quizzes, diagram, mixer, pidSim, filters, printing].forEach(function (f) {
-      try { f(); } catch (e) { if (window.console) console.error(e); }
-    });
+    try {
+      [circuit, reveal, scrollFx, menu, lightbox, search, checklists, spy, quizzes, diagram, mixer, pidSim, filters, printing].forEach(function (f) {
+        try { f(); } catch (e) { if (window.console) console.error(e); }
+      });
+    } catch (e) {
+      /* Never leave content hidden if the script fails. */
+      if (window.console) console.error(e);
+      $$('.rv').forEach(function (el) { el.classList.add('in'); });
+    }
   });
 })();
