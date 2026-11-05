@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Drone | AMD Labs</title>
+<meta name="description" content="How MoonLady Beta 1 works: interactive system diagram, 3D model, motor mixing, flight modes, safety systems and payload.">
+<meta name="theme-color" content="#050a17">
+<meta property="og:title" content="The Drone | AMD Labs">
+<meta property="og:description" content="How MoonLady Beta 1 works: interactive system diagram, 3D model, motor mixing, flight modes, safety systems and payload.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-image.png">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/drone3d.bundle.js" defer></script>
+<script src="assets/js/search-index.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script>window.NODE_INFO={"stm32": {"tag": "Flight controller", "t": "STM32H743VIT6", "b": "The brain of the drone. A 250 Hz timer drives sensor reading, sensor fusion, PID and motor mixing. It runs firmware our team wrote in C. The chip is rated up to 480 MHz, and the current firmware runs it at 80 MHz."}, "imu": {"tag": "Sensor", "t": "MPU6500 IMU", "b": "Gyroscope and accelerometer on the fast SPI bus. It passes through a hardware filter of about 41 Hz, then software filters, then Mahony sensor fusion to give roll, pitch and yaw."}, "baro": {"tag": "Sensor", "t": "BMP280 barometer", "b": "Measures air pressure to estimate altitude for altitude hold. Oversampling, a built-in filter and a 5% software average calm the noise from propeller wash, and a foam cover shields it physically."}, "mag": {"tag": "Sensor and payload", "t": "QMC5883L magnetometer", "b": "Does two jobs: gives the drone its compass heading and detects magnetic anomalies. It sits on a 3D-printed mast, away from motor and power noise. The firmware also auto-detects HMC5883L and QMC5883P clones."}, "gps": {"tag": "Sensor", "t": "u-blox NEO-M8N GPS", "b": "Gives position over UART for geofencing, return-to-launch and tagging magnetic readings on a map. Accuracy is a few metres, which limits how precisely an anomaly can be located."}, "esp": {"tag": "Coprocessor", "t": "ESP32 telemetry bridge", "b": "Takes all Wi-Fi work off the flight controller. It passes JSON telemetry and commands between UART and a TCP connection to the dashboard server, and reconnects without blocking."}, "dash": {"tag": "Ground station", "t": "Aeronexus dashboard", "b": "A Node.js server and browser app with live attitude, a waypoint map, PID sliders, 3D magnetometer calibration, survey heatmaps and multi-drone fleet tools."}, "esc": {"tag": "Actuation", "t": "Hobbywing Skywalker 30A ESCs", "b": "Turn the flight controller's PWM pulses into three-phase power for each motor. At 30 A they have about twice the current the motors draw at peak, and sitting on the arms keeps them cool in the propeller airflow."}, "motor": {"tag": "Actuation", "t": "EMAX XA2212 980 KV motors", "b": "Paired with 1045 propellers and a 3S battery for efficient lifting rather than speed. We moved to these branded motors after cheap ones produced uneven thrust."}, "nrf": {"tag": "Radio", "t": "nRF24L01+PA+LNA receiver", "b": "Receives an 8-byte stick packet on 2.4 GHz at 250 kbps, chosen for range rather than speed. The firmware polls it once per loop, so it never interrupts the PID timing."}, "tx": {"tag": "Pilot control", "t": "Custom transmitter", "b": "An ESP32 reads two joysticks through an ADS1115 converter, sends packets at 50 Hz and refreshes its OLED at 4 Hz, so the display never delays the controls."}};</script>
+</head>
+<body data-page="drone">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="circuit" aria-hidden="true"></canvas>
+<div class="scrollbar" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img src="assets/img/logo-mark.webp" width="420" height="256" alt=""><span>AMD <span>Labs</span></span></a>
+    <button class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5h16M2 10h16M2 15h16"/></svg></button>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="story.html">Our Story</a><a href="drone.html" aria-current=page>The Drone</a><a href="build.html">Build It</a><a href="learn.html">Learn</a><a href="challenges.html">Challenges</a><a href="resources.html">Resources</a><a href="roadmap.html">Roadmap</a><a href="contact.html">Contact</a></nav>
+    <button class="icon-btn search-btn" aria-label="Search this site"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><p class="eyebrow rv">How it works</p><h1 class="rv">The Blueprint of<em> Our Drone</em></h1><div class="bar rv"></div><p class="lead rv">MoonLady Beta 1 is a 450 mm quadcopter with a custom flight controller, its own transmitter and a web ground station.</p></div></section>
+<section style="padding-top:10px" id="system"><div class="wrap">
+  <h2 class="rv" style="font-size:clamp(1.6rem,3vw,2rem)">Select a block to explore</h2>
+  <div class="diagram-wrap rv">
+    <div class="diagram"><svg viewBox="0 0 860 560" role="group" aria-label="System block diagram">
+<rect x="20" y="30" width="330" height="205" rx="12" fill="#5fd38d0d" stroke="#5fd38d" stroke-dasharray="5 5"/><text x="185" y="225" text-anchor="middle" fill="#9fd9b6" font-size="12">Sensor kit</text>
+<g stroke-linejoin="round">
+<path class="flow" stroke="#5fd38d" d="M260 85H372V265H400"/>
+<path class="flow" stroke="#5fd38d" d="M100 175V285H400"/>
+<path class="flow" stroke="#5fd38d" d="M265 175V250Q265 300 300 300H400"/>
+<path class="flow" stroke="#5fd38d" d="M210 370H330V325H400"/>
+<path class="flow" stroke="#58a6ff" d="M470 150V235"/>
+<path class="flow rev" stroke="#4dd4e0" d="M545 90H640"/>
+<path class="flow" stroke="#ef6a5a" d="M540 285H660"/>
+<path class="flow" stroke="#ef6a5a" d="M725 325V400"/>
+<path class="flow rev" stroke="#f2a63b" d="M470 450V345"/>
+<path class="flow rev" stroke="#f2a63b" d="M470 515H320"/>
+</g>
+<g><rect x="353.0" y="165" width="38" height="20" rx="5" fill="#071224" stroke="#5fd38d"/><text class="bus" x="372" y="179" text-anchor="middle" fill="#5fd38d">SPI</text></g><g><rect x="151.0" y="275" width="38" height="20" rx="5" fill="#071224" stroke="#5fd38d"/><text class="bus" x="170" y="289" text-anchor="middle" fill="#5fd38d">SPI</text></g><g><rect x="246.0" y="230" width="38" height="20" rx="5" fill="#071224" stroke="#5fd38d"/><text class="bus" x="265" y="244" text-anchor="middle" fill="#5fd38d">I2C</text></g><g><rect x="277.0" y="360" width="46" height="20" rx="5" fill="#071224" stroke="#5fd38d"/><text class="bus" x="300" y="374" text-anchor="middle" fill="#5fd38d">UART</text></g><g><rect x="447.0" y="180" width="46" height="20" rx="5" fill="#071224" stroke="#58a6ff"/><text class="bus" x="470" y="194" text-anchor="middle" fill="#58a6ff">UART</text></g><g><rect x="565.0" y="80" width="54" height="20" rx="5" fill="#071224" stroke="#4dd4e0"/><text class="bus" x="592" y="94" text-anchor="middle" fill="#4dd4e0">Wi-Fi</text></g><g><rect x="581.0" y="275" width="38" height="20" rx="5" fill="#071224" stroke="#ef6a5a"/><text class="bus" x="600" y="289" text-anchor="middle" fill="#ef6a5a">PWM</text></g><g><rect x="690.0" y="352" width="70" height="20" rx="5" fill="#071224" stroke="#ef6a5a"/><text class="bus" x="725" y="366" text-anchor="middle" fill="#ef6a5a">3-phase</text></g><g><rect x="451.0" y="385" width="38" height="20" rx="5" fill="#071224" stroke="#f2a63b"/><text class="bus" x="470" y="399" text-anchor="middle" fill="#f2a63b">SPI</text></g><g><rect x="360.0" y="505" width="70" height="20" rx="5" fill="#071224" stroke="#f2a63b"/><text class="bus" x="395" y="519" text-anchor="middle" fill="#f2a63b">2.4 GHz</text></g>
+<g class="node" data-node="imu" tabindex="0" role="button" aria-label="Accelerometer + gyroscope" style="color:#5fd38d"><rect x="40" y="50" width="220" height="70" rx="9" fill="#5fd38d1c" stroke="#5fd38d" stroke-width="1.6"/><text x="150.0" y="82.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Accelerometer + gyroscope</text><text x="150.0" y="99.0" text-anchor="middle" fill="#a9bccb" font-size="11">MPU6500</text></g>
+<g class="node" data-node="baro" tabindex="0" role="button" aria-label="Barometer" style="color:#5fd38d"><rect x="40" y="130" width="120" height="60" rx="9" fill="#5fd38d1c" stroke="#5fd38d" stroke-width="1.6"/><text x="100.0" y="157.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Barometer</text><text x="100.0" y="174.0" text-anchor="middle" fill="#a9bccb" font-size="11">BMP280</text></g>
+<g class="node" data-node="mag" tabindex="0" role="button" aria-label="Magnetometer" style="color:#5fd38d"><rect x="190" y="130" width="150" height="60" rx="9" fill="#5fd38d1c" stroke="#5fd38d" stroke-width="1.6"/><text x="265.0" y="157.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Magnetometer</text><text x="265.0" y="174.0" text-anchor="middle" fill="#a9bccb" font-size="11">QMC5883L</text></g>
+<g class="node" data-node="gps" tabindex="0" role="button" aria-label="GPS module" style="color:#5fd38d"><rect x="50" y="335" width="160" height="70" rx="9" fill="#5fd38d1c" stroke="#5fd38d" stroke-width="1.6"/><text x="130.0" y="367.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">GPS module</text><text x="130.0" y="384.0" text-anchor="middle" fill="#a9bccb" font-size="11">NEO-M8N</text></g>
+<g class="node" data-node="esp" tabindex="0" role="button" aria-label="ESP32-WROOM-32" style="color:#58a6ff"><rect x="395" y="50" width="150" height="100" rx="9" fill="#58a6ff1c" stroke="#58a6ff" stroke-width="1.6"/><text x="470.0" y="97.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">ESP32-WROOM-32</text><text x="470.0" y="114.0" text-anchor="middle" fill="#a9bccb" font-size="11">Telemetry bridge</text></g>
+<g class="node" data-node="dash" tabindex="0" role="button" aria-label="Web dashboard" style="color:#4dd4e0"><rect x="640" y="55" width="190" height="70" rx="9" fill="#4dd4e01c" stroke="#4dd4e0" stroke-width="1.6"/><text x="735.0" y="87.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Web dashboard</text><text x="735.0" y="104.0" text-anchor="middle" fill="#a9bccb" font-size="11">Aeronexus</text></g>
+<g class="node" data-node="stm32" tabindex="0" role="button" aria-label="STM32H743" style="color:#58a6ff"><rect x="400" y="235" width="140" height="110" rx="9" fill="#58a6ff1c" stroke="#58a6ff" stroke-width="1.6"/><text x="470.0" y="287.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">STM32H743</text><text x="470.0" y="304.0" text-anchor="middle" fill="#a9bccb" font-size="11">Flight controller</text></g>
+<g class="node" data-node="esc" tabindex="0" role="button" aria-label="ESCs ×4" style="color:#ef6a5a"><rect x="660" y="245" width="130" height="80" rx="9" fill="#ef6a5a1c" stroke="#ef6a5a" stroke-width="1.6"/><text x="725.0" y="282.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">ESCs ×4</text><text x="725.0" y="299.0" text-anchor="middle" fill="#a9bccb" font-size="11">Skywalker 30A</text></g>
+<g class="node" data-node="motor" tabindex="0" role="button" aria-label="Motors ×4" style="color:#ef6a5a"><rect x="660" y="400" width="130" height="80" rx="9" fill="#ef6a5a1c" stroke="#ef6a5a" stroke-width="1.6"/><text x="725.0" y="437.0" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Motors ×4</text><text x="725.0" y="454.0" text-anchor="middle" fill="#a9bccb" font-size="11">EMAX XA2212 980 KV</text></g>
+<g class="node" data-node="nrf" tabindex="0" role="button" aria-label="Radio receiver" style="color:#f2a63b"><rect x="385" y="450" width="170" height="65" rx="9" fill="#f2a63b1c" stroke="#f2a63b" stroke-width="1.6"/><text x="470.0" y="479.5" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Radio receiver</text><text x="470.0" y="496.5" text-anchor="middle" fill="#a9bccb" font-size="11">nRF24L01+PA+LNA</text></g>
+<g class="node" data-node="tx" tabindex="0" role="button" aria-label="Our transmitter" style="color:#f2a63b"><rect x="130" y="480" width="190" height="65" rx="9" fill="#f2a63b1c" stroke="#f2a63b" stroke-width="1.6"/><text x="225.0" y="509.5" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700">Our transmitter</text><text x="225.0" y="526.5" text-anchor="middle" fill="#a9bccb" font-size="11">ESP32, 2 joysticks, OLED</text></g>
+</svg></div><div class="node-list"><section style="padding:0"><h4>Flight controller</h4><div style="--c:#58a6ff"><button class="node" data-node="stm32" style="--c:#58a6ff">STM32H743VIT6</button></div></section><section style="padding:0"><h4>Sensors</h4><div style="--c:#5fd38d"><button class="node" data-node="imu" style="--c:#5fd38d">MPU6500 IMU</button><button class="node" data-node="baro" style="--c:#5fd38d">BMP280 barometer</button><button class="node" data-node="mag" style="--c:#5fd38d">QMC5883L magnetometer</button><button class="node" data-node="gps" style="--c:#5fd38d">u-blox NEO-M8N GPS</button></div></section><section style="padding:0"><h4>Pilot control</h4><div style="--c:#f2a63b"><button class="node" data-node="tx" style="--c:#f2a63b">Custom transmitter</button><button class="node" data-node="nrf" style="--c:#f2a63b">nRF24L01+PA+LNA receiver</button></div></section><section style="padding:0"><h4>Motors</h4><div style="--c:#ef6a5a"><button class="node" data-node="esc" style="--c:#ef6a5a">Hobbywing Skywalker 30A ESCs</button><button class="node" data-node="motor" style="--c:#ef6a5a">EMAX XA2212 980 KV motors</button></div></section><section style="padding:0"><h4>Telemetry</h4><div style="--c:#4dd4e0"><button class="node" data-node="esp" style="--c:#4dd4e0">ESP32 telemetry bridge</button><button class="node" data-node="dash" style="--c:#4dd4e0">Aeronexus dashboard</button></div></section></div>
+    <aside class="card node-info" id="node-info" aria-live="polite"></aside>
+  </div>
+</div></section>
+
+<section id="mixer-section"><div class="wrap">
+  <p class="eyebrow rv">Try it</p><h2 class="rv">Move the sticks, see the motors</h2><div class="bar rv"></div>
+  <p class="lead rv">These bars use the same motor mixing formula as the firmware. Tilting the model is only an illustration, not a flight simulation.</p>
+  <div class="split r-big" id="mixer" style="align-items:stretch">
+    <div class="card mixer rv">
+      <div class="slider"><label for="m-th">Throttle (µs)<output id="o-th">1450</output></label><input id="m-th" type="range" min="1150" max="1800" value="1450" step="10"></div><div class="slider"><label for="m-ro">Roll<output id="o-ro">0</output></label><input id="m-ro" type="range" min="-200" max="200" value="0" step="5"></div><div class="slider"><label for="m-pi">Pitch<output id="o-pi">0</output></label><input id="m-pi" type="range" min="-200" max="200" value="0" step="5"></div><div class="slider"><label for="m-ya">Yaw<output id="o-ya">0</output></label><input id="m-ya" type="range" min="-200" max="200" value="0" step="5"></div>
+      <button class="btn btn-g" data-mix-center style="justify-content:center">Centre the sticks</button>
+      <div class="motors">
+        <div class="motor"><b>M3 front left, CW<span id="mv3"></span></b><i><u id="mb3"></u></i></div>
+        <div class="motor"><b>M4 front right, CCW<span id="mv4"></span></b><i><u id="mb4"></u></i></div>
+        <div class="motor"><b>M1 rear left, CCW<span id="mv1"></span></b><i><u id="mb1"></u></i></div>
+        <div class="motor"><b>M2 rear right, CW<span id="mv2"></span></b><i><u id="mb2"></u></i></div>
+      </div>
+    </div>
+    <div class="stage rv" data-model role="img" aria-label="Interactive 3D model of the drone that responds to the sliders">
+      <img class="poster" src="assets/img/model-preview.webp" alt="" width="1000" height="625" loading="lazy">
+      <span class="stage-hint">Drag to rotate. 3D model for illustration.</span>
+    </div>
+  </div>
+<pre class="rv" style="margin-top:20px"><code>M1 rear left   (CCW) = throttle + roll - pitch + yaw
+M2 rear right  (CW)  = throttle - roll - pitch - yaw
+M3 front left  (CW)  = throttle + roll + pitch - yaw
+M4 front right (CCW) = throttle - roll + pitch + yaw</code></pre>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="rv">What is inside</h2><div class="bar rv"></div>
+  <div class="grid g3">
+   <div class="card rv"><h3>Airframe and propulsion</h3><ul><li>F450 frame, 450 mm wheelbase</li><li>EMAX XA2212 980 KV motors</li><li>Hobbywing Skywalker 30A ESCs</li><li>1045 propellers, 2 CW and 2 CCW</li></ul></div>
+   <div class="card rv" style="--d:.06s"><h3>Power</h3><ul><li>3S 5200 mAh 60C LiPo</li><li>MP1584 buck converter to 5 V</li><li>3.3 V from onboard regulators</li><li>Ceramic and electrolytic decoupling</li></ul></div>
+   <div class="card rv" style="--d:.12s"><h3>Flight controller</h3><ul><li>STM32H743VIT6</li><li>MPU6500 and BMP280 on SPI2</li><li>Magnetometer on I2C1</li><li>Gains stored in internal flash</li></ul></div>
+   <div class="card rv"><h3>Transmitter</h3><ul><li>ESP32 Devkit V1</li><li>Two analog joysticks</li><li>ADS1115 converter at 860 samples/s</li><li>0.96" OLED and an 18650 cell</li></ul></div>
+   <div class="card rv" style="--d:.06s"><h3>Links</h3><ul><li>nRF24L01+PA+LNA, 2.4 GHz, 250 kbps</li><li>Wi-Fi via onboard ESP32</li><li>STM32 to ESP32 at 115200 baud</li><li>Telemetry as JSON at 5 Hz</li></ul></div>
+   <div class="card rv" style="--d:.12s"><h3>Software</h3><ul><li>STM32CubeIDE with C firmware</li><li>Arduino sketches on the ESP32s</li><li>Node.js, Socket.IO and Express</li><li>Three.js, Chart.js, Plotly, Leaflet</li></ul></div>
+  </div>
+</div></section>
+
+<section><div class="wrap split top">
+  <div><h2 class="rv">Flight modes</h2><div class="bar rv"></div>
+  <div class="table-wrap"><table><thead><tr><th>Mode</th><th>What it does</th></tr></thead><tbody><tr><td><b>Stabilize</b></td><td>Manual throttle with attitude PID. The default.</td></tr><tr><td><b>Altitude hold</b></td><td>Holds barometer altitude, captured when entered.</td></tr><tr><td><b>Loiter</b></td><td>Holds GPS position and altitude. Needs a GPS fix.</td></tr><tr><td><b>Return to launch</b></td><td>Flies back to the GPS position set at arming.</td></tr><tr><td><b>Auto</b></td><td>Flies to one waypoint, or a survey mission of up to 50.</td></tr></tbody></table></div>
+  <p class="muted small rv">Waypoint and survey modes are in the code. See the status list below for what has been shown in flight.</p>
+  <figure class="rv"><button class="zoom" aria-label="Enlarge: UAV block diagram from the AMD24 presentation"><span class="shot" style="display:block"><img src="assets/img/block-diagram.webp" alt="UAV block diagram from the AMD24 presentation" loading="lazy" width="1024" height="572"></span></button><figcaption>Block diagram from our presentation.</figcaption></figure></div>
+  <div><h2 class="rv">Built-in safety</h2><div class="bar rv"></div>
+  <div class="table-wrap"><table><thead><tr><th>If this happens</th><th>The drone does this</th></tr></thead><tbody><tr><td>Radio lost for 500 ms</td><td>Airborne with GPS: return to launch. Without GPS: slow descent. Idling on the ground: disarm.</td></tr><tr><td>Dashboard silent for 3 s</td><td>Abort auto mode and return to launch.</td></tr><tr><td>More than 500 m from home</td><td>Force return to launch.</td></tr><tr><td>More than 1000 m from home</td><td>Disarm immediately.</td></tr><tr><td>Extreme tilt while armed</td><td>Disarm immediately to protect people and hardware.</td></tr><tr><td>Battery below 10.2 V</td><td><b>Not active in the current code.</b> The firmware has this logic, but its battery reading is fixed at 13.2 V, so it cannot trigger. Use a timer and a LiPo alarm until this is fixed.</td></tr><tr><td>GPS lost in autonomous mode</td><td>Fall back to altitude hold and descend.</td></tr><tr><td>I2C errors 5 times in a row</td><td>Reset the bus by toggling the clock line, then restart the sensor.</td></tr></tbody></table></div></div>
+</div></section>
+
+<section id="payload"><div class="wrap">
+  <p class="eyebrow rv">Payload</p><h2 class="rv">A magnetometer as a metal detector</h2><div class="bar rv"></div>
+  <p class="lead rv">Coils are heavy and pick up motor noise, so we used a tiny digital magnetometer instead. It weighs a few grams and registers spikes in the magnetic field over concentrated metal. The readings are tagged with GPS and turned into maps on the dashboard.</p>
+  <div class="gallery" style="margin-top:1.4em">
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: Survey scan showing an anomaly hot spot"><span class="shot" style="display:block"><img src="assets/img/survey-scan.webp" alt="Survey scan showing an anomaly hot spot" loading="lazy" width="1400" height="637"></span></button><figcaption>Anomaly hot spot on the survey screen.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: 2D anomaly heatmap"><span class="shot" style="display:block"><img src="assets/img/survey-heatmap-2d.webp" alt="2D anomaly heatmap" loading="lazy" width="1400" height="637"></span></button><figcaption>2D heatmap, altitude-normalised and drift-corrected.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: 3D anomaly surface"><span class="shot" style="display:block"><img src="assets/img/survey-surface-3d.webp" alt="3D anomaly surface" loading="lazy" width="1400" height="637"></span></button><figcaption>The same survey idea shown as a 3D surface.</figcaption></figure>
+  </div>
+  <div class="callout warn rv"><b>What it can and cannot do</b><p>We class this as a preliminary sweeping platform. It can show the general zone of an anomaly for follow-up on the ground. It cannot give depth, volume or shape, and consumer GPS adds about 2 to 5 m of position error. It only senses metals that disturb the magnetic field, mainly ferrous ones.</p></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="eyebrow rv">Dashboard</p><h2 class="rv">Aeronexus ground station</h2><div class="bar rv"></div>
+  <div class="gallery">
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: Command dashboard"><span class="shot" style="display:block"><img src="assets/img/dash-command.webp" alt="Command dashboard" loading="lazy" width="1400" height="637"></span></button><figcaption>Command view: attitude, map and PID panels.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: Magnetometer calibration screen"><span class="shot" style="display:block"><img src="assets/img/dash-magcal.webp" alt="Magnetometer calibration screen" loading="lazy" width="1400" height="637"></span></button><figcaption>3D magnetometer calibration and live stick readout.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: Drone simulator"><span class="shot" style="display:block"><img src="assets/img/simulator.webp" alt="Drone simulator" loading="lazy" width="1400" height="713"></span></button><figcaption>Our simulator, for trying the drone virtually.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="status"><div class="wrap">
+  <h2 class="rv">What works today</h2><div class="bar rv"></div>
+  <div class="status"><div class="st rv" style="--d:0.00s"><span class="pill p-ok">Demonstrated</span><span>Custom flight firmware with a 250 Hz control loop, sensor fusion and failsafes running on the STM32H743.</span></div><div class="st rv" style="--d:0.04s"><span class="pill p-ok">Demonstrated</span><span>Stable vertical liftoff, reached after about twelve months of testing, rig work and PID tuning.</span></div><div class="st rv" style="--d:0.08s"><span class="pill p-ok">Demonstrated</span><span>Aeronexus dashboard: live telemetry, live PID changes, saved gains and 3D magnetometer calibration.</span></div><div class="st rv" style="--d:0.12s"><span class="pill p-ok">Demonstrated</span><span>Custom two-joystick transmitter with a radio link of about 100 m in clear line of sight.</span></div><div class="st rv" style="--d:0.16s"><span class="pill p-part">Limited</span><span>Sustained controlled hover in manual flight is not achieved yet. Thumb joysticks caused over-correction, so better gimbals are the next step.</span></div><div class="st rv" style="--d:0.20s"><span class="pill p-part">Limited</span><span>Metal detection works as a first sweep. It finds the rough zone of a magnetic disturbance, not an exact point, depth or shape.</span></div><div class="st rv" style="--d:0.24s"><span class="pill p-code">In code</span><span>GPS position hold, return-to-launch and waypoint survey missions are written in the firmware. We have not yet published flight results for them.</span></div><div class="st rv" style="--d:0.28s"><span class="pill p-no">Needs fixing</span><span>Battery monitoring: the firmware's reading is fixed at 13.2 V, so the dashboard value is not real and the low-battery failsafe cannot trigger.</span></div><div class="st rv" style="--d:0.32s"><span class="pill p-no">Needs data</span><span>Formal detection tests, with known objects and measured noise levels in flight, are still to be recorded.</span></div></div>
+  <h3 class="rv" style="margin-top:2em">Known limits</h3>
+  <div class="grid g4" style="margin-top:.6em">
+   <div class="stat rv"><b>5–7 min</b><span>safe flight time</span></div>
+   <div class="stat rv"><b>~100 m</b><span>radio range, line of sight</span></div>
+   <div class="stat rv"><b>Low altitude</b><span>daylight and clear weather only</span></div>
+   <div class="stat rv"><b>Near limit</b><span>little spare lift for heavier payloads</span></div>
+  </div>
+</div></section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><img src="assets/img/logo.webp" width="900" height="769" alt="AMD Labs logo" loading="lazy">
+        <p class="muted small">Adaptable and Modular Drone.<br>Ideas today. Smarter skies tomorrow.<br><b class="c">Showing at FITExpo 2026.</b></p></div>
+      <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="story.html">Our Story</a></li><li><a href="drone.html">The Drone</a></li><li><a href="build.html">Build It</a></li><li><a href="learn.html">Learn</a></li></ul></div>
+      <div><h4>Project</h4><ul>
+        <li><a href="challenges.html">Challenges</a></li><li><a href="resources.html">Resources</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="contact.html">Contact us</a></li>
+        <li><a href="https://github.com/Kaveesha-04/UAV" rel="noopener">Source code on GitHub</a></li></ul></div>
+    </div>
+    <div class="foot-b"><span>© 2026 AMD Labs, built by Team MicroSolutions.</span><span>Drones can injure people. Follow the safety steps and your local rules.</span></div>
+  </div>
+</footer>
+<nav class="tabbar" aria-label="Quick links"><a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Home</a><a href="drone.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 8l8 8M16 8l-8 8"/></svg>Drone</a><a href="build.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 6a4 4 0 0 0 5 5l-8 8a2.5 2.5 0 0 1-4-3l8-8a4 4 0 0 1-1-2z"/></svg>Build</a><a href="learn.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8l10-5 10 5-10 5zM6 11v6c3 2.500 9 2.500 12 0v-6"/></svg>Learn</a><a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg>Contact</a></nav>
+<div id="lightbox" tabindex="-1" role="dialog" aria-label="Enlarged image"><img alt=""></div>
+<div id="search" role="dialog" aria-label="Search"><div class="search-box"><input type="search" placeholder="Search the guide..." aria-label="Search the guide"><ul id="results"></ul></div></div>
+</body>
+</html>

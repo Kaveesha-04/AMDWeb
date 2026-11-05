@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our Story | AMD Labs</title>
+<meta name="description" content="How a first-year team with no drone experience built AMD24 and went on to start AMD Labs.">
+<meta name="theme-color" content="#050a17">
+<meta property="og:title" content="Our Story | AMD Labs">
+<meta property="og:description" content="How a first-year team with no drone experience built AMD24 and went on to start AMD Labs.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-image.png">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script src="assets/js/search-index.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+
+</head>
+<body data-page="story">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="circuit" aria-hidden="true"></canvas>
+<div class="scrollbar" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img src="assets/img/logo-mark.webp" width="420" height="256" alt=""><span>AMD <span>Labs</span></span></a>
+    <button class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5h16M2 10h16M2 15h16"/></svg></button>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="story.html" aria-current=page>Our Story</a><a href="drone.html">The Drone</a><a href="build.html">Build It</a><a href="learn.html">Learn</a><a href="challenges.html">Challenges</a><a href="resources.html">Resources</a><a href="roadmap.html">Roadmap</a><a href="contact.html">Contact</a></nav>
+    <button class="icon-btn search-btn" aria-label="Search this site"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><p class="eyebrow rv">Our story</p><h1 class="rv">From zero drone knowledge<em> to AMD Labs</em></h1><div class="bar rv"></div><p class="lead rv">Our story began with our first-year microcontroller project. When we started, none of us knew anything about drones. We had a dream and a proposal, and we had to bring them into the real world.</p></div></section>
+<section style="padding-top:10px"><div class="wrap split top">
+  <div>
+    <h2 class="rv" style="font-size:2rem">How it unfolded</h2>
+    <ol class="tl"><span class="tl-fill" aria-hidden="true"></span>
+    <li class="rv"><h3>A first-year project</h3><p>It began with our first-year microcontroller project (IN1901) at the Faculty of Information Technology, University of Moratuwa. None of us had built anything aerospace before. We were Group 39, Team MicroSolutions.</p></li><li class="rv"><h3>Learning from people who had done it</h3><p>We asked seniors, mentors and robotics teams, at our university and others, what actually fails in real drones. Their advice shaped our parts list: an F450 frame, 980 KV motors, 30 A ESCs and a 3S 5200 mAh battery.</p></li><li class="rv"><h3>Working around local supply limits</h3><p>Proper silicone wire and connectors were not sold locally, and importing them was too slow and too costly. So we tested generic connectors by trial and error, and harvested good wire from cheap assemblies.</p></li><li class="rv"><h3>Starting over with a new brain</h3><p>Our first flight controller used an ESP32, but its wireless stack and task scheduler caused timing jitter. We redesigned around an STM32H743 and gave the ESP32 a better job: running telemetry.</p></li><li class="rv"><h3>Taming noise and latency</h3><p>Motor spin-ups locked the I2C bus until capacitors stabilised the power rails. Moving the IMU from I2C to SPI then removed the biggest bottleneck in the control loop.</p></li><li class="rv"><h3>Tuning without crashing</h3><p>We could not afford a professional test bench, so we built wooden rigs that let the drone rotate on one axis while it stayed locked in place.</p></li><li class="rv"><h3>Finding the hardware flaw</h3><p>The drone kept drifting on liftoff. Magnets and Hall sensors on the motors showed that cheap motors and ESCs spun at different speeds on the same signal. Replacing them with branded parts fixed it.</p></li><li class="rv"><h3>First stable liftoff</h3><p>After about twelve months, the drone lifted off vertically and stably. Holding a controlled hover by hand is still unsolved: our thumb joysticks could not give fine enough inputs, so that is next on the list.</p></li><li class="rv"><h3>From project to AMD Labs</h3><p>After the project, we started an R&amp;D startup called AMD Labs, to keep building adaptable aerial systems.</p></li><li class="rv"><h3>Showing at FITExpo 2026</h3><p>Now we are showing AMD24 and everything we learned at FITExpo 2026, so that others can learn from it and build on it.</p></li>
+    </ol>
+  </div>
+  <div class="sticky-col">
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: F450 quadcopter frame with red and white arms"><span class="shot" style="display:block"><img src="assets/img/frame-f450.webp" alt="F450 quadcopter frame with red and white arms" loading="lazy" width="1100" height="825"></span></button><figcaption>The F450 frame at the start of the build.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: The drone being set up on the wooden pivot rig"><span class="shot" style="display:block"><img src="assets/img/rig-day.webp" alt="The drone being set up on the wooden pivot rig" loading="lazy" width="936" height="1072"></span></button><figcaption>Mounting the drone on a wooden rig for tuning.</figcaption></figure>
+  </div>
+</div></section>
+<section><div class="wrap">
+  <p class="eyebrow rv">The team</p><h2 class="rv">We are Team MicroSolutions</h2><div class="bar rv"></div>
+  <div class="grid g3">
+  <article class="card member rv" style="--d:0.00s"><div class="avatar" aria-hidden="true">MJ</div><h3>Malaka J. Prasad</h3><p class="small c">Hardware Interfacing, Sensor Fusion &amp; System Modeling Lead</p><p class="small" style="margin:0">IMU and sensor fusion, low-level drivers, and the 3D CAD models of the drone and transmitter.</p></article><article class="card member rv" style="--d:0.06s"><div class="avatar" aria-hidden="true">AL</div><h3>Abiram L</h3><p class="small c">Communication Protocols, Network Integration &amp; App Dev</p><p class="small" style="margin:0">The radio link, STM32-to-ESP32 communication, and the Aeronexus dashboard.</p></article><article class="card member rv" style="--d:0.12s"><div class="avatar" aria-hidden="true">AJ</div><h3>Achintha Jayawickrama</h3><p class="small c">Spatial Data Processing, Telemetry &amp; Hardware PCB Architect</p><p class="small" style="margin:0">GPS and magnetometer integration, survey visualisation, schematics and PCB design.</p></article><article class="card member rv" style="--d:0.18s"><div class="avatar" aria-hidden="true">NK</div><h3>Nimsara K. Karunarathna</h3><p class="small c">Propulsion, Power Systems &amp; Flight Control Loops Lead</p><p class="small" style="margin:0">Power distribution, motors and ESCs, PID tuning, motor mixing and status LEDs.</p></article><article class="card member rv" style="--d:0.24s"><div class="avatar" aria-hidden="true">LN</div><h3>Luxshana N</h3><p class="small c">Remote Controller &amp; Wireless Communication Systems Lead</p><p class="small" style="margin:0">The custom transmitter: joysticks, display, radio firmware and its power system.</p></article>
+  </div>
+  <div class="card rv" style="margin-top:20px"><h3>With thanks</h3><p style="margin:0">Our supervisor Mr. B.H. Sudhantha, our co-supervisor Mr. Hemantha Wanniarachchi, the staff of our department, and the seniors, mentors and robotics teams who shared what they knew.</p></div>
+</div></section>
+<section><div class="wrap split">
+  <div><p class="eyebrow rv">What we learned</p><h2 class="rv">Lessons we would pass on</h2><div class="bar rv"></div>
+  <ul class="rv"><li><b>Ask early.</b> One conversation with an experienced builder can save weeks.</li><li><b>Test each part alone.</b> We proved the motors with a spare ESP32 before the flight controller touched them.</li><li><b>Measure before blaming software.</b> Our worst drift problem turned out to be the motors.</li><li><b>Software cannot fix bad hardware.</b> Noise, uneven thrust and imprecise joysticks all needed physical fixes.</li><li><b>Build what you cannot buy.</b> Wooden rigs did the job of an expensive test bench.</li></ul></div>
+  <div class="card rv"><h3>Where next?</h3><p>Follow the same path: learn the ideas, build it stage by stage, and read the problems we hit along the way.</p><div class="btns"><a class="btn btn-p" href="learn.html">Start learning</a><a class="btn btn-g" href="roadmap.html">Our roadmap</a></div></div>
+</div></section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><img src="assets/img/logo.webp" width="900" height="769" alt="AMD Labs logo" loading="lazy">
+        <p class="muted small">Adaptable and Modular Drone.<br>Ideas today. Smarter skies tomorrow.<br><b class="c">Showing at FITExpo 2026.</b></p></div>
+      <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="story.html">Our Story</a></li><li><a href="drone.html">The Drone</a></li><li><a href="build.html">Build It</a></li><li><a href="learn.html">Learn</a></li></ul></div>
+      <div><h4>Project</h4><ul>
+        <li><a href="challenges.html">Challenges</a></li><li><a href="resources.html">Resources</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="contact.html">Contact us</a></li>
+        <li><a href="https://github.com/Kaveesha-04/UAV" rel="noopener">Source code on GitHub</a></li></ul></div>
+    </div>
+    <div class="foot-b"><span>© 2026 AMD Labs, built by Team MicroSolutions.</span><span>Drones can injure people. Follow the safety steps and your local rules.</span></div>
+  </div>
+</footer>
+<nav class="tabbar" aria-label="Quick links"><a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Home</a><a href="drone.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 8l8 8M16 8l-8 8"/></svg>Drone</a><a href="build.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 6a4 4 0 0 0 5 5l-8 8a2.5 2.5 0 0 1-4-3l8-8a4 4 0 0 1-1-2z"/></svg>Build</a><a href="learn.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8l10-5 10 5-10 5zM6 11v6c3 2.500 9 2.500 12 0v-6"/></svg>Learn</a><a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg>Contact</a></nav>
+<div id="lightbox" tabindex="-1" role="dialog" aria-label="Enlarged image"><img alt=""></div>
+<div id="search" role="dialog" aria-label="Search"><div class="search-box"><input type="search" placeholder="Search the guide..." aria-label="Search the guide"><ul id="results"></ul></div></div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AMD Labs | Drone Research &amp; Development</title>
+<meta name="description" content="AMD Labs built AMD24, a low-budget drone made from scratch, including its flight controller. Showing at FITExpo 2026. See how it works and learn to build it.">
+<meta name="theme-color" content="#050a17">
+<meta property="og:title" content="AMD Labs | Drone Research &amp; Development">
+<meta property="og:description" content="AMD Labs built AMD24, a low-budget drone made from scratch, including its flight controller. Showing at FITExpo 2026. See how it works and learn to build it.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-image.png">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/drone3d.bundle.js" defer></script>
+<script src="assets/js/search-index.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+
+</head>
+<body data-page="index">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="circuit" aria-hidden="true"></canvas>
+<div class="scrollbar" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img src="assets/img/logo-mark.webp" width="420" height="256" alt=""><span>AMD <span>Labs</span></span></a>
+    <button class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5h16M2 10h16M2 15h16"/></svg></button>
+    <nav class="nav" aria-label="Main"><a href="index.html" aria-current=page>Home</a><a href="story.html">Our Story</a><a href="drone.html">The Drone</a><a href="build.html">Build It</a><a href="learn.html">Learn</a><a href="challenges.html">Challenges</a><a href="resources.html">Resources</a><a href="roadmap.html">Roadmap</a><a href="contact.html">Contact</a></nav>
+    <button class="icon-btn search-btn" aria-label="Search this site"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <a class="expo-pill rv" href="#fitexpo"><i aria-hidden="true"></i>Showing at FITExpo 2026</a>
+    <h1><span class="ln"><span><span class="c">AMD</span><span class="w">24</span></span></span><span class="ln"><span><span class="w">The </span><span class="c">Drone</span></span></span><span class="ln"><span><span class="c">We </span><span class="w">Built</span></span></span></h1>
+    <p class="lead rv">A low-budget drone built from scratch, including the flight controller, by a first-year team that started with no drone experience.</p>
+    <div class="btns rv"><a class="btn btn-p" href="build.html">Build the drone</a><a class="btn btn-g" href="story.html">Read our story</a></div>
+    <a class="hero-scroll rv" href="#vision">Our vision <i>↓</i></a>
+  </div>
+  <div class="hero-logo"><img src="assets/img/logo.webp" width="900" height="769" alt="AMD Labs logo: a geometric peacock with drone arms, above the words AMD Labs" fetchpriority="high"></div>
+</div></section>
+
+<section id="fitexpo" style="padding-top:10px;padding-bottom:0"><div class="wrap"><div class="expo split rv">
+  <div><p class="eyebrow">Exhibition</p><h2>Meet us at <span>FITExpo 2026</span></h2>
+  <p>We are showing AMD24 and this website at FITExpo 2026. Come and talk to the team about how we built a drone from scratch, what went wrong, and where AMD Labs goes next.</p>
+  <div class="btns"><a class="btn btn-p" href="contact.html">Contact us</a><a class="btn btn-g" href="drone.html">Explore the drone</a></div></div>
+  <figure><div class="shot"><img src="assets/img/simulator.webp" width="1400" height="713" alt="The AMD24 simulator, set in a virtual FITExpo 2026 hall" loading="lazy"></div><figcaption>Our simulator, set in a virtual FITExpo 2026 hall.</figcaption></figure>
+</div></div></section>
+
+<section id="vision"><div class="wrap">
+  <div class="vm">
+    <div class="vm-card rv"><p class="eyebrow">Our vision</p><blockquote>The intelligent, modular aerial infrastructure for an evolving world.</blockquote></div>
+    <div class="vm-card rv" style="--d:.1s"><p class="eyebrow">Our mission</p><blockquote>Providing the adaptable aerial systems industries need to evolve and thrive.</blockquote></div>
+  </div>
+</div></section>
+
+<section><div class="wrap split">
+  <div>
+    <p class="eyebrow rv">Why we did this</p>
+    <h2 class="rv">A low-budget drone at the enterprise level</h2>
+    <div class="bar rv"></div>
+    <p class="lead rv">We set out to make a low-budget drone at the enterprise level, and to build it from scratch, including the flight controller.</p>
+    <h3 class="rv" style="margin-top:1.4em">Our story</h3>
+    <p class="rv">Our story began with our first-year microcontroller project. When we started, none of us knew anything about drones. We had a dream and a proposal, and we had to bring them into the real world.</p>
+    <p class="rv">Here you can learn about us and how we built it. We are Team MicroSolutions. After the project, we started an R&amp;D startup called AMD Labs.</p>
+    <div class="btns rv"><a class="btn btn-g" href="story.html">The full story</a></div>
+  </div>
+  <figure class="rv"><div class="tablet"><img src="assets/img/rig-night.webp" width="900" height="1200" alt="The quadcopter mounted on the team's wooden test rig at night" loading="lazy"><div class="radar" aria-hidden="true"><i></i><i></i><b></b></div></div><figcaption class="center">Our drone on the wooden test rig we built for safe tuning.</figcaption></figure>
+</div></section>
+
+<section class="center"><div class="wrap">
+  <h2 class="rv">Your Journey</h2><div class="bar rv"></div>
+  <p class="lead rv">Start wherever you like. Everything we learned is here, including what went wrong.</p>
+  <div class="journey">
+    <a class="rv" href="story.html"><svg viewBox="0 0 120 120" fill="none" aria-hidden="true"><g stroke="#4dd4e0" stroke-width="6" stroke-linecap="round" class="bulb-ray"><path d="M60 6v12M22 20l9 9M98 20l-9 9M10 58h12M98 58h12"/></g><path d="M60 26a30 30 0 0 0-17 54c3 3 4 6 4 10h26c0-4 1-7 4-10a30 30 0 0 0-17-54z" fill="#4dd4e0"/><path d="M48 96h24M50 104h20M54 112h12" stroke="#4dd4e0" stroke-width="5" stroke-linecap="round"/><path d="M60 88V56m0 8-10-12m10 20 10-12" stroke="#0a3f55" stroke-width="3"/></svg>Introduction<small>Who we are and why we started</small></a>
+    <a class="rv" style="--d:.08s" href="drone.html"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="gear " fill="#3f7fae"><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(0 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(45 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(90 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(135 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(180 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(225 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(270 46 46)"/><rect x="41.2" y="10.7" width="9.5" height="11.2" rx="2" transform="rotate(315 46 46)"/><circle cx="46" cy="46" r="28"/><circle cx="46" cy="46" r="14.0" fill="#050a17"/></g><g class="gear rev" fill="#3f7fae"><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(0 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(45 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(90 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(135 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(180 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(225 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(270 88 84)"/><rect x="84.6" y="58.8" width="6.8" height="8.0" rx="2" transform="rotate(315 88 84)"/><circle cx="88" cy="84" r="20"/><circle cx="88" cy="84" r="10.0" fill="#050a17"/></g></svg>How It Works<small>The blueprint of our drone</small></a>
+    <a class="rv" style="--d:.16s" href="learn.html"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="hover-drone" fill="#3f7fae" stroke="#3f7fae"><path d="M26 42l34 16 34-16" stroke-width="5" fill="none"/><rect x="42" y="50" width="36" height="20" rx="6"/><path d="M46 70l-12 26M74 70l12 26" stroke-width="4" fill="none"/><path class="prop" d="M6 40h40M74 40h40" stroke-width="5"/></g></svg>How It Flies<small>Nine lessons, from thrust to PID</small></a>
+    <a class="rv" style="--d:.24s" href="build.html"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="gear " fill="#3f7fae"><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(0 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(45 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(90 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(135 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(180 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(225 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(270 84 38)"/><rect x="80.6" y="12.8" width="6.8" height="8.0" rx="2" transform="rotate(315 84 38)"/><circle cx="84" cy="38" r="20"/><circle cx="84" cy="38" r="10.0" fill="#050a17"/></g><g class="gear rev" fill="#3f7fae"><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(0 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(45 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(90 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(135 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(180 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(225 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(270 50 26)"/><rect x="48.0" y="10.9" width="4.1" height="4.8" rx="2" transform="rotate(315 50 26)"/><circle cx="50" cy="26" r="12"/><circle cx="50" cy="26" r="6.0" fill="#050a17"/></g><path d="M40 112V76c0-10 8-16 16-16s16 6 16 16v36M56 60a11 11 0 1 0 0-22 11 11 0 0 0 0 22z" fill="#2c5a84"/><path d="M36 62l-12-14m0 0l-6 4m6-4l2-8" stroke="#f2a63b" stroke-width="5" stroke-linecap="round" fill="none"/></svg>How To Make<small>The build, stage by stage</small></a>
+  </div>
+</div></section>
+
+<section><div class="wrap split r-big">
+  <div>
+    <p class="eyebrow rv">MoonLady Beta 1</p>
+    <h2 class="rv">Our custom-built quadcopter</h2><div class="bar rv"></div>
+    <p class="rv">Drag to turn the 3D model. A custom flight controller built around an STM32H743 runs firmware we wrote ourselves. An ESP32 handles Wi-Fi, a second ESP32 runs our own transmitter, and a web dashboard shows it all live.</p>
+    <div class="stats">
+      <div class="stat rv"><b data-count="250" data-suffix=" Hz">250 Hz</b><span>control loop</span></div>
+      <div class="stat rv" style="--d:.06s"><b data-count="100" data-prefix="~" data-suffix=" m">~100 m</b><span>radio range, line of sight</span></div>
+      <div class="stat rv" style="--d:.12s"><b data-count="91900" data-prefix="Rs ">Rs 91,900</b><span>product parts cost</span></div>
+      <div class="stat rv" style="--d:.18s"><b data-count="5">5</b><span>first-year team members</span></div>
+    </div>
+    <div class="btns rv"><a class="btn btn-p" href="drone.html">Explore the drone</a></div>
+  </div>
+  <div class="stage stage-big rv" data-model role="img" aria-label="Interactive 3D model of the MoonLady Beta 1 quadcopter">
+    <img class="poster" src="assets/img/model-preview.webp" alt="" width="1000" height="625" loading="lazy">
+    <span class="stage-hint">Drag to rotate. 3D model for illustration.</span>
+  </div>
+</div></section>
+
+<section class="center" id="controls"><div class="wrap">
+  <h2 class="rv">How It Flies</h2><p class="lead rv" style="margin-bottom:.4em">The Four Controls</p><div class="bar rv"></div>
+  <div class="controls">
+<article class="ctl rv"><svg viewBox="0 0 200 150" role="img" aria-label="Drone rising and falling"><g class="a-throttle" fill="#06111d" stroke="#06111d"><path d="M40 62H160" stroke-width="6"/><rect x="82" y="52" width="36" height="21" rx="6"/><path d="M80 73l-12 18M120 73l12 18" stroke-width="4"/><rect x="37" y="50" width="6" height="12"/><rect x="157" y="50" width="6" height="12"/><path class="prop" d="M18 48H62" stroke-width="4"/><path class="prop" d="M138 48H182" stroke-width="4"/></g><g stroke="#06111d" stroke-width="2.5" class="a-wind"><path d="M50 110l-8 34M75 112l-4 32M125 112l4 32M150 110l8 34M100 112v32"/></g></svg><h3>Throttle</h3><p>Controls altitude by motor speed</p></article>
+<article class="ctl rv" style="--d:.08s"><svg viewBox="0 0 200 160" role="img" aria-label="Drone rotating on the spot"><g class="a-yaw"><g class="" fill="#06111d" stroke="#06111d"><path d="M70 62L130 98M130 62L70 98" stroke-width="7"/><rect x="82" y="66" width="36" height="28" rx="9"/><g stroke-width="4"><ellipse cx="66" cy="60" rx="18" ry="5" fill="none"/><ellipse cx="134" cy="60" rx="18" ry="5" fill="none"/><ellipse cx="66" cy="100" rx="18" ry="5" fill="none"/><ellipse cx="134" cy="100" rx="18" ry="5" fill="none"/></g></g></g><g fill="none" stroke="#06111d" stroke-width="5" transform="translate(0 0)"><path d="M38 44A78 62 0 0 1 150 28"/><path d="M162 116A78 62 0 0 1 50 132"/></g><path d="M162 28l-18-10 2 20zM38 132l18 10-2-20z" fill="#06111d"/></svg><h3>Yaw</h3><p>Rotates drone nose in place</p></article>
+<article class="ctl rv" style="--d:.16s"><svg viewBox="0 0 200 150" role="img" aria-label="Drone tilting forward and back"><g class="a-pitch" fill="#06111d" stroke="#06111d"><path d="M40 72H160" stroke-width="6"/><rect x="82" y="62" width="36" height="21" rx="6"/><path d="M80 83l-12 18M120 83l12 18" stroke-width="4"/><rect x="37" y="60" width="6" height="12"/><rect x="157" y="60" width="6" height="12"/><path class="prop" d="M18 58H62" stroke-width="4"/><path class="prop" d="M138 58H182" stroke-width="4"/></g><g fill="none" stroke="#06111d" stroke-width="3" class="a-wind"><path d="M20 22q40-14 70 0M110 22q40-14 70 0"/></g></svg><h3>Pitch</h3><p>Tilts forward or backward direction</p></article>
+<article class="ctl rv" style="--d:.24s"><svg viewBox="0 0 200 150" role="img" aria-label="Drone tilting and sliding sideways"><g class="a-roll" fill="#06111d" stroke="#06111d"><path d="M40 70H160" stroke-width="6"/><rect x="82" y="60" width="36" height="21" rx="6"/><path d="M80 81l-12 18M120 81l12 18" stroke-width="4"/><rect x="37" y="58" width="6" height="12"/><rect x="157" y="58" width="6" height="12"/><path class="prop" d="M18 56H62" stroke-width="4"/><path class="prop" d="M138 56H182" stroke-width="4"/></g><path d="M28 128h144" stroke="#06111d" stroke-width="3" stroke-dasharray="8 8" class="a-wind"/><path d="M172 128l-12-7v14zM28 128l12-7v14z" fill="#06111d"/></svg><h3>Roll</h3><p>Moves sideways by motor speed</p></article>
+</div>
+  <div class="btns rv" style="justify-content:center;margin-top:2.6em"><a class="btn btn-g" href="drone.html#mixer-section">Try them on the 3D model</a></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="rv">Aeronexus Dashboard</h2><p class="lead rv">Real-time telemetry and pilot interface, built by our team and running in any web browser.</p><div class="bar rv"></div>
+  <figure class="rv"><button class="zoom" aria-label="Enlarge: Aeronexus dashboard showing 3D attitude, waypoint map and PID sliders"><span class="shot" style="display:block"><img src="assets/img/dash-overview.webp" alt="Aeronexus dashboard showing 3D attitude, waypoint map and PID sliders" loading="lazy" width="1024" height="459"></span></button><figcaption>Live attitude, waypoints and PID tuning, with changes saved to the flight controller.</figcaption></figure>
+  <div class="gallery" style="margin-top:20px">
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: 3D surface plot of a magnetic survey"><span class="shot" style="display:block"><img src="assets/img/survey-surface-3d.webp" alt="3D surface plot of a magnetic survey" loading="lazy" width="1400" height="637"></span></button><figcaption>Magnetic survey shown as a 3D surface.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: 2D heatmap of a magnetic survey"><span class="shot" style="display:block"><img src="assets/img/survey-heatmap-2d.webp" alt="2D heatmap of a magnetic survey" loading="lazy" width="1400" height="637"></span></button><figcaption>The same kind of data as a 2D heatmap.</figcaption></figure>
+    <figure class="rv"><button class="zoom" aria-label="Enlarge: Live telemetry on the Aeronexus dashboard"><span class="shot" style="display:block"><img src="assets/img/dash-command.webp" alt="Live telemetry on the Aeronexus dashboard" loading="lazy" width="1400" height="637"></span></button><figcaption>Live flight data on the dashboard.</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap split top">
+  <div><p class="eyebrow rv">Honest status</p><h2 class="rv">Where the drone stands today</h2><div class="bar rv"></div>
+  <p class="rv">This is a working research prototype and enterprise level is still our goal. We publish what works, what is limited and what still needs proving, because that is what helps the next builder.</p>
+  <div class="btns rv"><a class="btn btn-g" href="challenges.html">See the challenges</a></div></div>
+  <div class="status"><div class="st rv" style="--d:0.00s"><span class="pill p-ok">Demonstrated</span><span>Custom flight firmware with a 250 Hz control loop, sensor fusion and failsafes running on the STM32H743.</span></div><div class="st rv" style="--d:0.04s"><span class="pill p-ok">Demonstrated</span><span>Stable vertical liftoff, reached after about twelve months of testing, rig work and PID tuning.</span></div><div class="st rv" style="--d:0.08s"><span class="pill p-ok">Demonstrated</span><span>Aeronexus dashboard: live telemetry, live PID changes, saved gains and 3D magnetometer calibration.</span></div><div class="st rv" style="--d:0.12s"><span class="pill p-ok">Demonstrated</span><span>Custom two-joystick transmitter with a radio link of about 100 m in clear line of sight.</span></div><div class="st rv" style="--d:0.16s"><span class="pill p-part">Limited</span><span>Sustained controlled hover in manual flight is not achieved yet. Thumb joysticks caused over-correction, so better gimbals are the next step.</span></div><div class="st rv" style="--d:0.20s"><span class="pill p-part">Limited</span><span>Metal detection works as a first sweep. It finds the rough zone of a magnetic disturbance, not an exact point, depth or shape.</span></div><div class="st rv" style="--d:0.24s"><span class="pill p-code">In code</span><span>GPS position hold, return-to-launch and waypoint survey missions are written in the firmware. We have not yet published flight results for them.</span></div><div class="st rv" style="--d:0.28s"><span class="pill p-no">Needs fixing</span><span>Battery monitoring: the firmware's reading is fixed at 13.2 V, so the dashboard value is not real and the low-battery failsafe cannot trigger.</span></div><div class="st rv" style="--d:0.32s"><span class="pill p-no">Needs data</span><span>Formal detection tests, with known objects and measured noise levels in flight, are still to be recorded.</span></div></div>
+</div></section>
+
+<section><div class="wrap split">
+  <div><h2 class="rv">Scan to Build<br>Your Drone</h2><div class="bar rv"></div>
+    <p class="rv"><b class="c">Access tutorials and open-source code.</b><br>Explore step-by-step guides and project resources. This code opens our GitHub repository.</p>
+    <div class="btns rv"><a class="btn btn-p" href="https://github.com/Kaveesha-04/UAV" rel="noopener">Open on GitHub</a><a class="btn btn-g" href="build.html">Start the tutorial</a></div></div>
+  <div class="scan rv"><img src="assets/img/qr-repo.svg" alt="QR code linking to the AMD24 GitHub repository" width="300" height="300"></div>
+</div></section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><img src="assets/img/logo.webp" width="900" height="769" alt="AMD Labs logo" loading="lazy">
+        <p class="muted small">Adaptable and Modular Drone.<br>Ideas today. Smarter skies tomorrow.<br><b class="c">Showing at FITExpo 2026.</b></p></div>
+      <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="story.html">Our Story</a></li><li><a href="drone.html">The Drone</a></li><li><a href="build.html">Build It</a></li><li><a href="learn.html">Learn</a></li></ul></div>
+      <div><h4>Project</h4><ul>
+        <li><a href="challenges.html">Challenges</a></li><li><a href="resources.html">Resources</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="contact.html">Contact us</a></li>
+        <li><a href="https://github.com/Kaveesha-04/UAV" rel="noopener">Source code on GitHub</a></li></ul></div>
+    </div>
+    <div class="foot-b"><span>© 2026 AMD Labs, built by Team MicroSolutions.</span><span>Drones can injure people. Follow the safety steps and your local rules.</span></div>
+  </div>
+</footer>
+<nav class="tabbar" aria-label="Quick links"><a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Home</a><a href="drone.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 8l8 8M16 8l-8 8"/></svg>Drone</a><a href="build.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 6a4 4 0 0 0 5 5l-8 8a2.5 2.5 0 0 1-4-3l8-8a4 4 0 0 1-1-2z"/></svg>Build</a><a href="learn.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8l10-5 10 5-10 5zM6 11v6c3 2.500 9 2.500 12 0v-6"/></svg>Learn</a><a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg>Contact</a></nav>
+<div id="lightbox" tabindex="-1" role="dialog" aria-label="Enlarged image"><img alt=""></div>
+<div id="search" role="dialog" aria-label="Search"><div class="search-box"><input type="search" placeholder="Search the guide..." aria-label="Search the guide"><ul id="results"></ul></div></div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roadmap | AMD Labs</title>
+<meta name="description" content="The AMD Labs upgrade roadmap for the AMD24 drone.">
+<meta name="theme-color" content="#050a17">
+<meta property="og:title" content="Roadmap | AMD Labs">
+<meta property="og:description" content="The AMD Labs upgrade roadmap for the AMD24 drone.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-image.png">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/drone3d.bundle.js" defer></script>
+<script src="assets/js/search-index.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+
+</head>
+<body data-page="roadmap">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="circuit" aria-hidden="true"></canvas>
+<div class="scrollbar" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img src="assets/img/logo-mark.webp" width="420" height="256" alt=""><span>AMD <span>Labs</span></span></a>
+    <button class="icon-btn menu-btn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5h16M2 10h16M2 15h16"/></svg></button>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="story.html">Our Story</a><a href="drone.html">The Drone</a><a href="build.html">Build It</a><a href="learn.html">Learn</a><a href="challenges.html">Challenges</a><a href="resources.html">Resources</a><a href="roadmap.html" aria-current=page>Roadmap</a><a href="contact.html">Contact</a></nav>
+    <button class="icon-btn search-btn" aria-label="Search this site"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l5 5"/></svg></button>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><p class="eyebrow rv">Roadmap</p><h1 class="rv">Where we go<em> from here</em></h1><div class="bar rv"></div><p class="lead rv">Beta 1 proved the core. These upgrades are how AMD Labs moves it from research prototype toward the enterprise-level platform we set out to build.</p></div></section>
+<section style="padding-top:10px"><div class="wrap split top">
+  <div class="rm">
+    <article class="card rv"><div><h3>Precise manual control</h3><p>Replace thumb joysticks with Hall-effect RC gimbals, then re-test sustained hover. This is the top priority, because it is what stopped us holding a hover.</p></div></article>
+    <article class="card rv"><div><h3>Prove autonomous flight</h3><p>Fly and document GPS position hold, return-to-launch and lawnmower survey missions, so that the code in the firmware becomes published results.</p></div></article>
+    <article class="card rv"><div><h3>Chip-level flight controller</h3><p>Move from breakout modules on a base PCB to a multi-layer board with the STM32H7, IMU and passives surface-mounted. Fewer connectors, less weight, less noise.</p></div></article>
+    <article class="card rv"><div><h3>Longer range</h3><p>Replace 2.4 GHz radios with sub-GHz links such as LoRa or ExpressLRS, to go from about 100 m to several kilometres.</p></div></article>
+    <article class="card rv"><div><h3>Better detection</h3><p>Move to fluxgate magnetometers or tuned induction coils, with digital signal processing to reduce false positives, plus proper validation tests.</p></div></article>
+    <article class="card rv"><div><h3>More lift and endurance</h3><p>Heavier sensors need a new propulsion set: lower KV motors, larger propellers and a higher-voltage battery.</p></div></article>
+  </div>
+  <div class="sticky-col">
+    <div class="stage rv" style="min-height:400px" data-model role="img" aria-label="Interactive 3D model of the drone"><img class="poster" src="assets/img/model-preview.webp" alt="" width="1000" height="625" loading="lazy"><span class="stage-hint">MoonLady Beta 1. 3D model for illustration.</span></div>
+  </div>
+</div></section>
+<section style="padding-top:0"><div class="wrap">
+  <div class="card rv center"><h3>Want to help or work with us?</h3><p>Partners, mentors and fellow builders are welcome.</p><div class="btns" style="justify-content:center"><a class="btn btn-p" href="contact.html">Contact us</a></div></div>
+</div></section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><img src="assets/img/logo.webp" width="900" height="769" alt="AMD Labs logo" loading="lazy">
+        <p class="muted small">Adaptable and Modular Drone.<br>Ideas today. Smarter skies tomorrow.<br><b class="c">Showing at FITExpo 2026.</b></p></div>
+      <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="story.html">Our Story</a></li><li><a href="drone.html">The Drone</a></li><li><a href="build.html">Build It</a></li><li><a href="learn.html">Learn</a></li></ul></div>
+      <div><h4>Project</h4><ul>
+        <li><a href="challenges.html">Challenges</a></li><li><a href="resources.html">Resources</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="contact.html">Contact us</a></li>
+        <li><a href="https://github.com/Kaveesha-04/UAV" rel="noopener">Source code on GitHub</a></li></ul></div>
+    </div>
+    <div class="foot-b"><span>© 2026 AMD Labs, built by Team MicroSolutions.</span><span>Drones can injure people. Follow the safety steps and your local rules.</span></div>
+  </div>
+</footer>
+<nav class="tabbar" aria-label="Quick links"><a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Home</a><a href="drone.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 8l8 8M16 8l-8 8"/></svg>Drone</a><a href="build.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 6a4 4 0 0 0 5 5l-8 8a2.5 2.5 0 0 1-4-3l8-8a4 4 0 0 1-1-2z"/></svg>Build</a><a href="learn.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8l10-5 10 5-10 5zM6 11v6c3 2.500 9 2.500 12 0v-6"/></svg>Learn</a><a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg>Contact</a></nav>
+<div id="lightbox" tabindex="-1" role="dialog" aria-label="Enlarged image"><img alt=""></div>
+<div id="search" role="dialog" aria-label="Search"><div class="search-box"><input type="search" placeholder="Search the guide..." aria-label="Search the guide"><ul id="results"></ul></div></div>
+</body>
+</html>
