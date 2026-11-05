@@ -52,7 +52,7 @@ Double-click `index.html`. Everything works without a server, including the 3D m
 
 ## License
 
-The website's code and text are under the [MIT License](LICENSE). The AMD Labs name and logo, the team photos and other project images are not licensed for reuse.
+The website's code and text are under the [MIT License](LICENSE). The AMD Labs name and logo, the team photos and other project images are not licensed for reuse. See [NOTICE](NOTICE).
 
 Third-party parts keep their own licences:
 

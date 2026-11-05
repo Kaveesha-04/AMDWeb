@@ -1,0 +1,9 @@
+The MIT License in the LICENSE file covers this website's code and text. It does not cover:
+
+- The AMD Labs name and logo, and the team photos and other project images in
+  assets/img. These remain the property of AMD Labs and the people shown, and
+  are not licensed for reuse.
+- three.js, included in assets/js/drone3d.bundle.js, which is under its own MIT
+  License: see assets/licenses/three-js-LICENSE.txt.
+- The Fira Sans typeface, embedded in assets/css/style.css, which is under the
+  SIL Open Font License: see assets/licenses/fira-sans-OFL.txt.
